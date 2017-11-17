@@ -1,0 +1,20 @@
+syntax = "proto2";
+// 模块名, 建议小写 linux 命令风格: echo
+package srpc;
+
+// 请求与应答消息定义
+message UnifiedReq
+{
+    optional int32 cmd = 1;
+}
+
+// 定义服务, 可以定义多个条目 建议首字符大写
+service GlobalService
+{
+    // 定义方法, 可以多份
+    rpc GlobalCall(UnifiedReq) returns (UnifiedReq);
+}
+
+option cc_generic_services = true; // 生成RPC，这行必须加上
+
+
